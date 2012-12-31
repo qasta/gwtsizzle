@@ -9,8 +9,8 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 
 /**
- * Main Sizzle object - this GWT overlay type will wrapp the global Sizzle object.
- * @see https://github.com/jquery/sizzle/wiki/Sizzle-Documentation
+ * Main Sizzle object - $wnd.Sizzle GWT overlay type will wrapp the global Sizzle object.
+ * @see 
  * 
  * @author sg
  * 
@@ -19,34 +19,34 @@ public class Sizzle extends JavaScriptObject {
 	protected Sizzle() {
 	}
 
-	public static final native Sizzle get()/*-{
-		return $wnd.Sizzle;
-	}-*/;
+//	public static final native Sizzle get()/*-{
+//		return $wnd.Sizzle;
+//	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
 	 * @return all of the elements matching the selector
 	 */
-	public final native JsArray<Element> sizzleArray(String selector)/*-{
+	public static final native JsArray<Element> sizzleArray(String selector)/*-{
 		return $wnd.Sizzle(selector);
 	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
 	 * @return all of the elements matching the selector
 	 */
-	public final native Collection<Element> sizzleCol(String selector)/*-{
+	public static final native Collection<Element> sizzleCol(String selector)/*-{
 		return @org.sgx.gwtsizzle.client.jsutil.JsUtil::toJavaCollection(Lcom/google/gwt/core/client/JavaScriptObject;)($wnd.Sizzle(selector)); 
 	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
@@ -54,12 +54,12 @@ public class Sizzle extends JavaScriptObject {
 	 *            An element or document to use as the context for finding elements. The default is the current document.
 	 * @return all of the elements matching the selector
 	 */
-	public final native JsArray<Element> sizzleArray(String selector, Element context)/*-{
+	public static final native JsArray<Element> sizzleArray(String selector, Element context)/*-{
 		return $wnd.Sizzle(selector, context);
 	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
@@ -67,12 +67,12 @@ public class Sizzle extends JavaScriptObject {
 	 *            An element or document to use as the context for finding elements. The default is the current document.
 	 * @return all of the elements matching the selector
 	 */
-	public final native Collection<Element> sizzleCol(String selector, Element context)/*-{
+	public static final native Collection<Element> sizzleCol(String selector, Element context)/*-{
 		return @org.sgx.gwtsizzle.client.jsutil.JsUtil::toJavaCollection(Lcom/google/gwt/core/client/JavaScriptObject;)($wnd.Sizzle(selector, context)); 
 	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
@@ -80,12 +80,12 @@ public class Sizzle extends JavaScriptObject {
 	 *            An element or document to use as the context for finding elements. The default is the current document.
 	 * @return all of the elements matching the selector
 	 */
-	public final native JsArray<Element> sizzleArray(String selector, Element context, JsArray<Element> results)/*-{
+	public static final native JsArray<Element> sizzleArray(String selector, Element context, JsArray<Element> results)/*-{
 		return $wnd.Sizzle(selector, context, results);
 	}-*/;
 
 	/**
-	 * This is the main function for finding elements. It will use querySelectorAll if available.
+	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector
@@ -93,7 +93,7 @@ public class Sizzle extends JavaScriptObject {
 	 *            An element or document to use as the context for finding elements. The default is the current document.
 	 * @return all of the elements matching the selector
 	 */
-	public final native Collection<Element> sizzleCol(String selector, Element context,
+	public static final native Collection<Element> sizzleCol(String selector, Element context,
 			JsArrayCollection<Element> results)/*-{
 		var r = results.@org.sgx.gwtsizzle.client.jsutil.JsArrayCollection::_data; 
 		return @org.sgx.gwtsizzle.client.jsutil.JsUtil::toJavaCollection(Lcom/google/gwt/core/client/JavaScriptObject;)($wnd.Sizzle(selector, context, r)); 
@@ -105,8 +105,8 @@ public class Sizzle extends JavaScriptObject {
 	 * @param selector A css selector
 	 * @return  whether the given element matches the selector
 	 */
-	public final native boolean matchesSelector(Element element, String selector)/*-{
-		return this.matchesSelector(element, selector); 
+	public static final native boolean matchesSelector(Element element, String selector)/*-{
+		return $wnd.Sizzle.matchesSelector(element, selector); 
 	}-*/;
 	
 	/**
@@ -115,8 +115,8 @@ public class Sizzle extends JavaScriptObject {
 	 * @param elements An array of DOMElements to filter against the specified selector.
 	 * @return  All the elements in the set that match the given selector.
 	 */
-	public final native JsArray<Element> matches(String selector, JsArray<Element> elements)/*-{
-		return this.matches(selector, elements); 
+	public static final native JsArray<Element> matches(String selector, JsArray<Element> elements)/*-{
+		return $wnd.Sizzle.matches(selector, elements); 
 	}-*/;
 
 
@@ -126,9 +126,9 @@ public class Sizzle extends JavaScriptObject {
 	 * @param elements An array of DOMElements to filter against the specified selector.
 	 * @return  All the elements in the set that match the given selector.
 	 */
-	public final native Collection<Element> matches(String selector, JsArrayCollection<Element> elements)/*-{
+	public static final native Collection<Element> matches(String selector, JsArrayCollection<Element> elements)/*-{
 		var r = elements.@org.sgx.gwtsizzle.client.jsutil.JsArrayCollection::_data; 
-		return @org.sgx.gwtsizzle.client.jsutil.JsUtil::toJavaCollection(Lcom/google/gwt/core/client/JavaScriptObject;)(this.matches(selector, r)); 
+		return @org.sgx.gwtsizzle.client.jsutil.JsUtil::toJavaCollection(Lcom/google/gwt/core/client/JavaScriptObject;)($wnd.Sizzle.matches(selector, r)); 
 	}-*/;
 	
 }

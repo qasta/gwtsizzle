@@ -19,10 +19,6 @@ public class Sizzle extends JavaScriptObject {
 	protected Sizzle() {
 	}
 
-//	public static final native Sizzle get()/*-{
-//		return $wnd.Sizzle;
-//	}-*/;
-
 	/**
 	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 

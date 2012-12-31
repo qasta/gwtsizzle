@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @author: sgurin 
+-->
+<project name="gwtsizzle" default="jar">
+
+	<property file="build.properties" />
+	<description>
+        make java doc of all this java project
+		@author: sgurin
+    </description>
+
+
+	<target name="compile-all" depends="clean">
+		<antcall target="javac">
+		</antcall>
+		<antcall target="gwtc">
+			<param name="moduleName" value="org.sgx.gwtsizzle.Sizzle" />
+		</antcall>
+		<antcall target="gwtc">
+			<param name="moduleName" value="org.sgx.gwtsizzletest.SizzleTest" />
+		</antcall>
+	</target>
+	
+	<target name="compile-test" depends="clean">
+		<antcall target="javac">
+		</antcall>
+		<antcall target="gwtc">
+			<param name="moduleName" value="org.sgx.gwtsizzletest.SizzleTest" />
+		</antcall>
+	</target>
+	<target name="compile-core" depends="clean">
+		<antcall target="javac">
+		</antcall>
+		<antcall target="gwtc">
+			<param name="moduleName" value="org.sgx.gwtsizzle.Sizzle" />
+		</antcall>
+	</target>
+
+	
+	
+	
+	<target name="clean" depends="">
+		<delete dir="dist" />
+		<delete dir="gwt-unitCache" />
+		<delete dir="war/WEB-INF/deploy" />
+		<delete dir="org.sgx.gapi.GAPI" />
+		<delete dir="www-test" />
+		<delete dir="classes" />
+	</target>
+
+	
+
+	<target name="jar"  depends="compile-core"
+		>
+		<mkdir dir="dist" />
+		<delete file="dist/gwtsizzle-${gwtsizzle.version}.jar"></delete>
+		<jar destfile="dist/gwtsizzle-${gwtsizzle.version}.jar">
+			
+			<fileset dir="classes">	
+				<exclude name="org/sgx/gwtsizzletest/"></exclude>	
+			</fileset>
+			
+			<fileset dir="src">	
+				<exclude name="org/sgx/gwtsizzletest/"></exclude>	
+			</fileset>
+			
+		</jar>
+	</target>
+	
+	
+	<path id="javac.class.path">
+		<pathelement location="${gwt.sdk}/gwt-user.jar" />
+		<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar" />
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
+	</path>
+
+	<target name="javac">
+		<mkdir dir="classes" />
+		<javac srcdir="src" destdir="classes" classpathref="javac.class.path">
+
+			<compilerarg line="-encoding utf-8" />
+
+		</javac>
+	</target>
+
+
+
+
+
+
+
+
+	<path id="gwtc.class.path">
+		<!--<pathelement location="${gwt.sdk}/gwt-user.jar" />-->
+		<pathelement location="classes" />
+		<fileset dir="${gwt.sdk}" includes="**/*.jar" />
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
+	</path>
+
+	<target name="gwtc" description="individual GWT compile to JavaScript">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="src" />
+				<path refid="gwtc.class.path" />
+			</classpath>
+
+			<jvmarg value="-Xmx256M" />
+
+			<arg value="-strict">
+			</arg>
+
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG 		
+			<arg value="-draftCompile"></arg>			
+			<arg value="-style"></arg>
+			<arg value="DETAILED"></arg>-->
+
+			<arg value="-war" />
+			<arg value="war" />
+
+			<arg value="${moduleName}" />
+		</java>
+	</target>
+
+
+</project>

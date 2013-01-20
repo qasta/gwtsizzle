@@ -3,7 +3,6 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 	
-	<script src="sizzle-min.js"></script>
 	<source path="client"/>
 	
 </module>

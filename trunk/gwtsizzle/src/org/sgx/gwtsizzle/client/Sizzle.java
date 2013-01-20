@@ -3,10 +3,15 @@ package org.sgx.gwtsizzle.client;
 import java.util.Collection;
 
 import org.sgx.gwtsizzle.client.jsutil.JsArrayCollection;
+import org.sgx.gwtsizzle.client.jsutil.JsUtil;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * Main Sizzle object - $wnd.Sizzle GWT overlay type will wrapp the global Sizzle object.
@@ -19,8 +24,32 @@ public class Sizzle extends JavaScriptObject {
 	protected Sizzle() {
 	}
 
+	
+/* load sizzle.js stuff: we load it using a TextResource and ScriptInjector.fromString(), 
+ * not using the unsuported <script> in gwt.xml */
+	
+public interface SizzleResources extends ClientBundle {
+	
+	public static SizzleResources instance = GWT.create(SizzleResources.class); 
+	
+	@Source("sizzle-min.js")
+	TextResource sizzlejs();
+}
+
+public static void loadSizzleJs() {
+	String text = SizzleResources.instance.sizzlejs().getText(); 
+	ScriptInjector.fromString(text).setWindow(JsUtil.window().cast()).inject();
+
+}
+
+static {
+	loadSizzleJs(); 
+}
+	
+	
+	
 	/**
-	 * $wnd.Sizzle is the main function for finding elements. It will use querySelectorAll if available.
+	 * Sizzle is the main function for finding elements. It will use querySelectorAll if available.
 	 * 
 	 * @param selector
 	 *            A css selector

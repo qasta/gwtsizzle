@@ -10,15 +10,15 @@ public class SizzleTest implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+		
+		// ala JavaScript
+		JsArray<Element> result = Sizzle.sizzleArray("div p");
+		for (int i = 0; i < result.length(); i++)
+			System.out.println(result.get(i).getTagName());
 
-// ala JavaScript
-JsArray<Element> result = Sizzle.sizzleArray("div p");
-for (int i = 0; i < result.length(); i++)
-	System.out.println(result.get(i).getTagName());
-
-// ala Java
-for (Element e : Sizzle.sizzleCol("div p"))
-	System.out.println(e.getTagName());
+		// ala Java
+		for (Element e : Sizzle.sizzleCol("div p"))
+			System.out.println(e.getTagName());
 
 	}
 

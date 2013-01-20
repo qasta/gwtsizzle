@@ -11,6 +11,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayMixed;
 import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.Window;
 
@@ -514,7 +515,7 @@ public class JsUtil {
 		return (typeof (o));
 	}-*/;
 
-	public static native final Window window()/*-{
+	public static native final Element window()/*-{
 		return $wnd;
 	}-*/;
 
